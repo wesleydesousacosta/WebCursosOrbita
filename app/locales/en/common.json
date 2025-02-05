@@ -1,0 +1,19 @@
+{
+  "heroTitle": "Welcome to EduLearn",
+  "heroDescription": "Your platform for online courses and learning",
+  "exploreCourses": "Explore Courses",
+  "popularCourses": "Popular Courses",
+  "testimonialsTitle": "What Our Students Say",
+  "readyToStart": "Ready to start learning?",
+  "signupMessage": "Sign up today and start your journey",
+  "createAccount": "Create Account",
+  "gitCourse": "Git for Beginners",
+  "javascriptCourse": "JavaScript Basics",
+  "nodejsCourse": "Node.js Development",
+  "reactCourse": "Master React",
+  "joaoFeedback": "EduLearn transformed the way I learn coding!",
+  "mariaFeedback": "I love how courses are structured.",
+  "jorgeFeedback": "Great platform, easy to use and effective.",
+  "sergioFeedback": "The courses helped me advance in my career!"
+}
+
