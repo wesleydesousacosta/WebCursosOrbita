@@ -4,7 +4,6 @@
 
 import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
-import ProtectedRoute from '../components/ProtectedRoute';
 
 const StudentArea = () => {
   const [courses, setCourses] = useState([]);
@@ -18,26 +17,24 @@ const StudentArea = () => {
   }, []);
 
   return (
-    <ProtectedRoute>
-      <div>
-        <Navbar />
-        <main className="container mx-auto p-4">
-          <h1 className="text-4xl font-bold mb-4">My Courses</h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {courses.map((course, index) => (
-              <div key={index} className="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden transition-colors duration-300">
-                <img src={course.image} alt={course.title} className="w-full h-48 object-cover" />
-                <div className="p-4">
-                  <h2 className="text-xl font-bold mb-2 dark:text-white">{course.title}</h2>
-                  <p className="text-gray-700 dark:text-gray-300">{course.progress}% completed</p>
-                  <a href={`/course/${course.id}`} className="text-blue-600 dark:text-blue-400">Continue Course</a>
-                </div>
+    <div>
+      <Navbar />
+      <main className="container mx-auto p-4">
+        <h1 className="text-4xl font-bold mb-4">My Courses</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {courses.map((course, index) => (
+            <div key={index} className="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden transition-colors duration-300">
+              <img src={course.image} alt={course.title} className="w-full h-48 object-cover" />
+              <div className="p-4">
+                <h2 className="text-xl font-bold mb-2 dark:text-white">{course.title}</h2>
+                <p className="text-gray-700 dark:text-gray-300">{course.progress}% completed</p>
+                <a href={`/course/${course.id}`} className="text-blue-600 dark:text-blue-400">Continue Course</a>
               </div>
-            ))}
-          </div>
-        </main>
-      </div>
-    </ProtectedRoute>
+            </div>
+          ))}
+        </div>
+      </main>
+    </div>
   );
 };
 
