@@ -1,8 +1,7 @@
-//path: edulearn/config/firebaseConfig.js
-
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getAnalytics, isSupported } from "firebase/analytics";
+import { getFirestore } from "firebase/firestore"; // Importando Firestore
 
 // Configuração do Firebase usando variáveis de ambiente
 const firebaseConfig = {
@@ -28,4 +27,6 @@ if (typeof window !== 'undefined') {
   });
 }
 
-export { app, auth, analytics };
+const db = getFirestore(app); // Inicializando o Firestore
+
+export { db, auth, analytics }; // Exportando db, auth e analytics

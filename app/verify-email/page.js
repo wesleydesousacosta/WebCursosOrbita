@@ -1,9 +1,10 @@
-"use client"; // Adicione esta linha no início do arquivo
+"use client"; // Adiciona esta linha no início do arquivo
 
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import { doc, setDoc, getDoc, getFirestore } from "firebase/firestore"; // Corrigir a importação
+import { doc, setDoc, getDoc } from "firebase/firestore"; // Corrigido a importação de getDoc
 import { getAuth } from "firebase/auth";
+import { db } from "../../firebase"; // Certifique-se de importar o db corretamente
 import Image from "next/image";
 import Navbar from "../../components/Navbar";
 
@@ -37,20 +38,19 @@ const courses = {
 export default function CoursePage() {
   const { id } = useParams();
   const course = courses[id];
-  const db = getFirestore();
   const [isCourseStarted, setIsCourseStarted] = useState(false);
 
   useEffect(() => {
     const user = getAuth().currentUser;
     if (user) {
       const userCourseRef = doc(db, "user_courses", user.uid);
-      getDoc(userCourseRef).then((docSnap) => { // Corrigir o uso de getDoc
+      getDoc(userCourseRef).then((docSnap) => { // Corrigido o uso de getDoc
         if (docSnap.exists() && docSnap.data()[id]) {
           setIsCourseStarted(true); // Curso já foi iniciado
         }
       });
     }
-  }, [id, db]);
+  }, [id]);
 
   const handleStartCourse = async () => {
     const user = getAuth().currentUser;
