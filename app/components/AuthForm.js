@@ -1,5 +1,4 @@
 // path: edulearn/components/AuthForm.js
-
 "use client";
 
 import { useState } from 'react';
@@ -65,7 +64,9 @@ export default function AuthForm({ mode }) {
           className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800"
           disabled={loading}
         >
-          {loading ? (mode === 'signup' ? 'Creating Account...' : 'Logging In...') : (mode === 'signup' ? 'Sign Up' : 'Login')}
+          {loading ? (
+            <span className="spinner-border spinner-border-sm"></span>
+          ) : mode === 'signup' ? 'Sign Up' : 'Login'}
         </button>
       </form>
     </div>

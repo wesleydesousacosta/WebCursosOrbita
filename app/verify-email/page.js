@@ -1,12 +1,12 @@
-"use client"; // Adiciona esta linha no início do arquivo
+"use client";
 
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import { doc, setDoc, getDoc } from "firebase/firestore"; // Corrigido a importação de getDoc
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { db } from "../../firebase"; // Certifique-se de importar o db corretamente
+import { db } from "@/config/firebaseConfig";
 import Image from "next/image";
-import Navbar from "../../components/Navbar";
+import Navbar from "@/app/components/Navbar";
 
 const courses = {
   "git-course": {
@@ -41,15 +41,18 @@ export default function CoursePage() {
   const [isCourseStarted, setIsCourseStarted] = useState(false);
 
   useEffect(() => {
-    const user = getAuth().currentUser;
-    if (user) {
-      const userCourseRef = doc(db, "user_courses", user.uid);
-      getDoc(userCourseRef).then((docSnap) => { // Corrigido o uso de getDoc
+    const fetchCourseProgress = async () => {
+      const user = getAuth().currentUser;
+      if (user) {
+        const userCourseRef = doc(db, "user_courses", user.uid);
+        const docSnap = await getDoc(userCourseRef);
         if (docSnap.exists() && docSnap.data()[id]) {
-          setIsCourseStarted(true); // Curso já foi iniciado
+          setIsCourseStarted(true);
         }
-      });
-    }
+      }
+    };
+
+    fetchCourseProgress();
   }, [id]);
 
   const handleStartCourse = async () => {
@@ -57,7 +60,6 @@ export default function CoursePage() {
     if (user) {
       const userCourseRef = doc(db, "user_courses", user.uid);
 
-      // Adiciona o curso à lista de cursos do usuário
       await setDoc(
         userCourseRef,
         {
@@ -65,13 +67,13 @@ export default function CoursePage() {
             title: course.title,
             image: course.image,
             description: course.description,
-            progress: 0, // Inicia o curso com 0% de progresso
+            progress: 0,
           },
         },
         { merge: true }
       );
 
-      setIsCourseStarted(true); // Marca o curso como iniciado
+      setIsCourseStarted(true);
     }
   };
 
@@ -87,14 +89,14 @@ export default function CoursePage() {
         <Image src={course.image} alt={course.title} width={600} height={350} className="rounded-lg shadow-md" />
         <p className="mt-4 text-lg">{course.description}</p>
         <p className="mt-2 text-gray-700 dark:text-gray-300">{course.content}</p>
-        
+
         {isCourseStarted ? (
           <button disabled className="mt-4 px-4 py-2 bg-gray-500 text-white rounded">
             Course Started
           </button>
         ) : (
-          <button 
-            onClick={handleStartCourse} 
+          <button
+            onClick={handleStartCourse}
             className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
           >
             Start Course

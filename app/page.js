@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../config/firebaseConfig'; // Ajuste o caminho conforme necessário
+import CourseCard from './components/CourseCard'; // Importando o novo componente
 
 export default function Home() {
   const [user, setUser] = useState(null);
@@ -73,11 +74,11 @@ export default function Home() {
         <h2 className="text-3xl font-bold text-center mb-6">Popular Courses</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {courses.map((course) => (
-            <div key={course.id} className="cursor-pointer bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 transform transition hover:scale-105"
-              onClick={(e) => handleCourseClick(e, course.id)}>
-              <Image src={course.image} alt={course.title} width={400} height={250} className="rounded-md" />
-              <h3 className="text-xl font-semibold mt-4">{course.title}</h3>
-            </div>
+            <CourseCard 
+              key={course.id} 
+              course={course} 
+              onClick={(e) => handleCourseClick(e, course.id)} 
+            />
           ))}
         </div>
       </section>

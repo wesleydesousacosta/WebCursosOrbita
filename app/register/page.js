@@ -1,5 +1,7 @@
 // path: edulearn/src/app/register/page.js
 
+"use client"; // Marca o arquivo como um Client Component
+
 import { useState } from 'react';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../config/firebaseConfig';

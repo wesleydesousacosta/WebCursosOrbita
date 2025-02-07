@@ -1,10 +1,8 @@
-// path: edulearn/components/Navbar.js
-
 'use client';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { FaHome, FaBook, FaUserGraduate, FaSun, FaMoon } from 'react-icons/fa';
+import { FaHome, FaBook, FaUserGraduate, FaSun, FaMoon, FaInfoCircle, FaEnvelope } from 'react-icons/fa';
 import { useRouter } from 'next/navigation'; // Certifique-se de usar o correto
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../config/firebaseConfig';  // Ajuste o caminho conforme necessário
@@ -79,7 +77,13 @@ const Navbar = () => {
           >
             <FaUserGraduate className="mr-2" /> Student Area
           </a>
-          
+          <Link href="/about" className="text-white flex items-center dark:text-gray-300">
+            <FaInfoCircle className="mr-2" /> About Us
+          </Link>
+          <Link href="/contact" className="text-white flex items-center dark:text-gray-300">
+            <FaEnvelope className="mr-2" /> Contact Us
+          </Link>
+
           {/* Botão de alternância do tema (somente ícones minimalistas sem cor) */}
           <button
             onClick={toggleTheme}
