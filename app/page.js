@@ -1,4 +1,4 @@
-//path: app/page.js
+// caminho: app/page.js
 
 'use client';
 
@@ -15,20 +15,12 @@ export default function Home() {
   const [user, setUser] = useState(null);
   const router = useRouter();
 
-  // Feedback dos estudantes
-  const studentsFeedback = [
-    { name: "John Silva", feedback: "Great platform!", image: "/images/joao.jpg" },
-    { name: "Maria Souza", feedback: "I learned a lot from the courses!", image: "/images/maria.jpg" },
-    { name: "George Almeida", feedback: "Highly recommend to everyone!", image: "/images/jorge.jpeg" },
-    { name: "Sergio Oliveira", feedback: "Best learning experience!", image: "/images/sergio.jpg" }
-  ];
-
   // Cursos populares
   const courses = [
-    { id: "git-course", title: "Git Course", image: "/images/git-course.png" },
-    { id: "javascript-course", title: "JavaScript Course", image: "/images/javascript-course.jpg" },
-    { id: "nodejs-course", title: "Node.js Course", image: "/images/nodejs-course.jpg" },
-    { id: "react-course", title: "React Course", image: "/images/react-course.jpg" }
+    { id: "git-course", title: "Curso de Git", image: "/images/git-course.png" },
+    { id: "javascript-course", title: "Curso de JavaScript", image: "/images/javascript-course.jpg" },
+    { id: "nodejs-course", title: "Curso de Node.js", image: "/images/nodejs-course.jpg" },
+    { id: "react-course", title: "Curso de React", image: "/images/react-course.jpg" }
   ];
 
   // Verifica o estado de autenticação do usuário
@@ -57,21 +49,21 @@ export default function Home() {
     <>
       <Navbar />
 
-      {/* Hero Section - Alinhando conteúdo à esquerda */}
+      {/* Seção Hero - Alinhando conteúdo à esquerda */}
       <section 
         className="relative h-[500px] flex flex-col items-start justify-center text-left bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-8 bg-cover bg-center"
         style={{ backgroundImage: "url('/images/background.png')" }}
       >
-        <h1 className="text-5xl font-bold mb-4">Welcome to EduLearn</h1>
-        <p className="text-lg max-w-2xl">The best platform to learn new skills!</p>
+        <h1 className="text-5xl font-bold mb-4">Bem-vindo ao Orbita</h1>
+        <p className="text-lg max-w-2xl">A melhor plataforma para aprender novas habilidades!</p>
         <Link href="/courses" className="mt-6 bg-white text-blue-600 px-6 py-3 rounded-lg text-lg font-semibold shadow-md hover:bg-gray-200">
-          Explore Courses
+          Explorar Cursos
         </Link>
       </section>
 
-      {/* Popular Courses */}
+      {/* Cursos Populares */}
       <section className="container mx-auto p-8">
-        <h2 className="text-3xl font-bold text-center mb-6">Popular Courses</h2>
+        <h2 className="text-3xl font-bold text-center mb-6">Cursos Populares</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {courses.map((course) => (
             <CourseCard 
@@ -83,34 +75,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="bg-gray-100 dark:bg-gray-900 py-12">
-        <h2 className="text-3xl font-bold text-center mb-6">Testimonials</h2>
-        <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {studentsFeedback.map((student) => (
-            <div key={student.name} className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md flex flex-col items-center text-center h-full">
-              <div className="w-20 h-20">
-                <Image 
-                  src={student.image} 
-                  alt={student.name} 
-                  width={80} 
-                  height={80} 
-                  className="rounded-full object-cover w-full h-full" 
-                />
-              </div>
-              <h3 className="text-lg font-semibold mt-4">{student.name}</h3>
-              <p className="text-gray-600 dark:text-gray-300 mt-2">{student.feedback}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Call to Action */}
+      {/* Chamada para Ação */}
       <section className="bg-blue-600 text-white text-center py-12">
-        <h2 className="text-3xl font-bold">Ready to get started?</h2>
-        <p className="text-lg mt-2">Create your account and start learning today!</p>
+        <h2 className="text-3xl font-bold">Pronto para começar?</h2>
+        <p className="text-lg mt-2">Crie sua conta e comece a aprender hoje mesmo!</p>
         <Link href="/signup" className="mt-6 inline-block bg-white text-blue-600 px-6 py-3 rounded-lg text-lg font-semibold shadow-md hover:bg-gray-200">
-          Sign Up
+          Inscrever-se
         </Link>
       </section>
     </>

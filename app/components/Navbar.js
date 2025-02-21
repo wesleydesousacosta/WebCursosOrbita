@@ -58,30 +58,30 @@ const Navbar = () => {
   return (
     <nav className="bg-blue-600 p-4 shadow-lg dark:bg-gray-900 dark:text-white">
       <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-white text-2xl font-bold">EduLearn</h1>
+        <h1 className="text-white text-2xl font-bold">Orbita</h1>
         <div className="flex items-center space-x-4">
           <Link href="/" className="text-white flex items-center dark:text-gray-300">
-            <FaHome className="mr-2" /> Home
+            <FaHome className="mr-2" /> Início
           </Link>
           <a 
             href="/courses" 
             onClick={(e) => handleNavigation(e, '/courses')} 
             className="text-white flex items-center dark:text-gray-300"
           >
-            <FaBook className="mr-2" /> Courses
+            <FaBook className="mr-2" /> Cursos
           </a>
           <a 
             href="/student" 
             onClick={(e) => handleNavigation(e, '/student')} 
             className="text-white flex items-center dark:text-gray-300"
           >
-            <FaUserGraduate className="mr-2" /> Student Area
+            <FaUserGraduate className="mr-2" /> Área do Aluno
           </a>
           <Link href="/about" className="text-white flex items-center dark:text-gray-300">
-            <FaInfoCircle className="mr-2" /> About Us
+            <FaInfoCircle className="mr-2" /> Sobre Nós
           </Link>
           <Link href="/contact" className="text-white flex items-center dark:text-gray-300">
-            <FaEnvelope className="mr-2" /> Contact Us
+            <FaEnvelope className="mr-2" /> Contato
           </Link>
 
           {/* Botão de alternância do tema (somente ícones minimalistas sem cor) */}

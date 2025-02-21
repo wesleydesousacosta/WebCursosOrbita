@@ -8,98 +8,98 @@ import { db } from "@/config/firebaseConfig";
 import Image from "next/image";
 import Navbar from "@/app/components/Navbar";
 
-const courses = {
+const cursos = {
   "git-course": {
-    title: "Git Course",
-    description: "Learn version control with Git.",
+    title: "Curso de Git",
+    description: "Aprenda controle de versão com Git.",
     image: "/images/git-course.png",
-    content: "This course covers Git fundamentals, including commits, branches, merges, and more advanced features like rebasing and resolving conflicts.",
+    content: "Este curso aborda os fundamentos do Git, incluindo commits, branches, merges e recursos avançados como rebase e resolução de conflitos.",
   },
   "javascript-course": {
-    title: "JavaScript Course",
-    description: "Master the JavaScript language from basics to advanced topics.",
+    title: "Curso de JavaScript",
+    description: "Domine a linguagem JavaScript do básico ao avançado.",
     image: "/images/javascript-course.jpg",
-    content: "Learn about variables, functions, loops, asynchronous programming, closures, and ES6+ features like arrow functions and promises.",
+    content: "Aprenda sobre variáveis, funções, loops, programação assíncrona, closures e recursos do ES6+, como arrow functions e promises.",
   },
   "nodejs-course": {
-    title: "Node.js Course",
-    description: "Backend development with Node.js.",
+    title: "Curso de Node.js",
+    description: "Desenvolvimento backend com Node.js.",
     image: "/images/nodejs-course.jpg",
-    content: "Explore how to build APIs, handle file manipulation, work with Express.js, and connect your Node.js application to databases like MongoDB and SQL.",
+    content: "Explore como construir APIs, manipular arquivos, trabalhar com Express.js e conectar sua aplicação Node.js a bancos de dados como MongoDB e SQL.",
   },
   "react-course": {
-    title: "React Course",
-    description: "Learn how to build dynamic user interfaces with React.",
+    title: "Curso de React",
+    description: "Aprenda a construir interfaces dinâmicas com React.",
     image: "/images/react-course.jpg",
-    content: "Discover how to create reusable components, manage state, work with hooks, handle forms, and implement routing with React Router.",
+    content: "Descubra como criar componentes reutilizáveis, gerenciar estado, trabalhar com hooks, manipular formulários e implementar roteamento com React Router.",
   },
 };
 
-export default function CoursePage() {
+export default function PaginaCurso() {
   const { id } = useParams();
-  const course = courses[id];
-  const [isCourseStarted, setIsCourseStarted] = useState(false);
+  const curso = cursos[id];
+  const [cursoIniciado, setCursoIniciado] = useState(false);
 
   useEffect(() => {
-    const fetchCourseProgress = async () => {
-      const user = getAuth().currentUser;
-      if (user) {
-        const userCourseRef = doc(db, "user_courses", user.uid);
-        const docSnap = await getDoc(userCourseRef);
+    const buscarProgressoCurso = async () => {
+      const usuario = getAuth().currentUser;
+      if (usuario) {
+        const referenciaCursoUsuario = doc(db, "user_courses", usuario.uid);
+        const docSnap = await getDoc(referenciaCursoUsuario);
         if (docSnap.exists() && docSnap.data()[id]) {
-          setIsCourseStarted(true);
+          setCursoIniciado(true);
         }
       }
     };
 
-    fetchCourseProgress();
+    buscarProgressoCurso();
   }, [id]);
 
-  const handleStartCourse = async () => {
-    const user = getAuth().currentUser;
-    if (user) {
-      const userCourseRef = doc(db, "user_courses", user.uid);
+  const iniciarCurso = async () => {
+    const usuario = getAuth().currentUser;
+    if (usuario) {
+      const referenciaCursoUsuario = doc(db, "user_courses", usuario.uid);
 
       await setDoc(
-        userCourseRef,
+        referenciaCursoUsuario,
         {
           [id]: {
-            title: course.title,
-            image: course.image,
-            description: course.description,
+            title: curso.title,
+            image: curso.image,
+            description: curso.description,
             progress: 0,
           },
         },
         { merge: true }
       );
 
-      setIsCourseStarted(true);
+      setCursoIniciado(true);
     }
   };
 
-  if (!course) {
-    return <div className="text-center text-xl font-bold p-8">Course not found!</div>;
+  if (!curso) {
+    return <div className="text-center text-xl font-bold p-8">Curso não encontrado!</div>;
   }
 
   return (
     <>
       <Navbar />
       <div className="container mx-auto p-4">
-        <h1 className="text-3xl font-bold mb-4">{course.title}</h1>
-        <Image src={course.image} alt={course.title} width={600} height={350} className="rounded-lg shadow-md" />
-        <p className="mt-4 text-lg">{course.description}</p>
-        <p className="mt-2 text-gray-700 dark:text-gray-300">{course.content}</p>
+        <h1 className="text-3xl font-bold mb-4">{curso.title}</h1>
+        <Image src={curso.image} alt={curso.title} width={600} height={350} className="rounded-lg shadow-md" />
+        <p className="mt-4 text-lg">{curso.description}</p>
+        <p className="mt-2 text-gray-700 dark:text-gray-300">{curso.content}</p>
 
-        {isCourseStarted ? (
+        {cursoIniciado ? (
           <button disabled className="mt-4 px-4 py-2 bg-gray-500 text-white rounded">
-            Course Started
+            Curso Iniciado
           </button>
         ) : (
           <button
-            onClick={handleStartCourse}
+            onClick={iniciarCurso}
             className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
           >
-            Start Course
+            Iniciar Curso
           </button>
         )}
       </div>

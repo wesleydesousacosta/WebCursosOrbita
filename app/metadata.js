@@ -1,5 +1,5 @@
 // src/app/metadata.js
 export const metadata = {
-    title: "EduLearn",
+    title: "Orbita",
     description: "Platform for learning",
   };

@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
-import { auth } from '../../config/firebaseConfig';
+import { auth, db } from '../../config/firebaseConfig';
 
 export default function AuthForm({ mode }) {
   const [email, setEmail] = useState('');
@@ -12,6 +12,9 @@ export default function AuthForm({ mode }) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  console.log(auth, db)
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();

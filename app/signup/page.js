@@ -1,15 +1,14 @@
-"use client";  // Marca o arquivo como um Client Component
+"use client";  // Marca o arquivo como um Componente Cliente
 
 import Navbar from "@/app/components/Navbar";
 import AuthForm from "@/app/components/AuthForm";
 
-
-const SignUp = () => {
+const Cadastro = () => {
   return (
     <>
       <Navbar />
       <div className="container mx-auto p-4">
-        <h1 className="text-4xl font-bold mb-4">Sign Up</h1>
+        <h1 className="text-4xl font-bold mb-4">Cadastre-se</h1>
         <AuthForm mode="signup" />
         <div className="mt-4 text-center">
           <p className="text-gray-600">
@@ -24,4 +23,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Cadastro;

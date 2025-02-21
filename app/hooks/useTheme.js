@@ -1,4 +1,4 @@
-// path: edulearn/app/hooks/useTheme.js
+// path: Obita/app/hooks/useTheme.js
 
 import { useEffect, useState } from "react";
 
