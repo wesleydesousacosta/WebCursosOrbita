@@ -1,10 +1,10 @@
-// path: edulearn/components/AuthForm.js
 "use client";
 
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useRouter } from 'next/navigation';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
-import { auth, db } from '../../config/firebaseConfig';
+import { auth } from '@/config/firebaseConfig';
+import { useAuth } from '../context/AuthContext';
 
 export default function AuthForm({ mode }) {
   const [email, setEmail] = useState('');
@@ -12,9 +12,7 @@ export default function AuthForm({ mode }) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
-  console.log(auth, db)
-  
+  const { currentUser } = useAuth(); // Acessa o usuário atual do contexto
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,15 +24,15 @@ export default function AuthForm({ mode }) {
         // Lógica de Signup (Cadastro)
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
-        await sendEmailVerification(user);  // Enviar verificação de email
+        await sendEmailVerification(user); // Enviar verificação de email
 
         // Redirecionar para a página de verificação de email
-        router.push('/verify-email');
+        router.push('/student');
       } else {
         // Lógica de Login
         await signInWithEmailAndPassword(auth, email, password);
         // Redirecionar para a página inicial ou painel do usuário
-        router.push('/dashboard');
+        router.push('/student');
       }
     } catch (err) {
       setError(err.message);
@@ -67,9 +65,7 @@ export default function AuthForm({ mode }) {
           className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800"
           disabled={loading}
         >
-          {loading ? (
-            <span className="spinner-border spinner-border-sm"></span>
-          ) : mode === 'signup' ? 'Sign Up' : 'Login'}
+          {loading ? 'Loading...' : mode === 'signup' ? 'Sign Up' : 'Login'}
         </button>
       </form>
     </div>
