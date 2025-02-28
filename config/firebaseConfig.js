@@ -5,15 +5,13 @@ import { getFirestore } from "firebase/firestore"; // Importando Firestore
 
 // Configuração do Firebase usando variáveis de ambiente
 const firebaseConfig = {
-  apiKey: "AIzaSyB3OkR_wlWiCVkoEVEv0G3GkAKIzylyOMg",
-  authDomain: "orbita-23d1a.firebaseapp.com",
-  projectId: "orbita-23d1a",
-  storageBucket: "orbita-23d1a.firebasestorage.app",
-  messagingSenderId: "977523831081",
-  appId: "1:977523831081:web:b296ea1b83aaff04218738",
-  measurementId: "G-5L4GV169DT"
+  apiKey: "AIzaSyCVC-r19vmc9O4rAGWWflfuuSwwJBJWvLE",
+  authDomain: "orbita-27817.firebaseapp.com",
+  projectId: "orbita-27817",
+  storageBucket: "orbita-27817.firebasestorage.app",
+  messagingSenderId: "718464172235",
+  appId: "1:718464172235:web:4347139b3ac57181019b4e"
 };
-
 
 // Inicializar Firebase
 const app = initializeApp(firebaseConfig);

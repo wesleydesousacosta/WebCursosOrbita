@@ -34,8 +34,7 @@ const cursos = {
     content: "Descubra como criar componentes reutilizáveis, gerenciar estado, trabalhar com hooks, manipular formulários e implementar roteamento com React Router.",
   },
 };
-
-export default function PaginaCurso() {
+const VerifyEmail = () => {
   const { id } = useParams();
   const curso = cursos[id];
   const [cursoIniciado, setCursoIniciado] = useState(false);
@@ -106,3 +105,4 @@ export default function PaginaCurso() {
     </>
   );
 }
+export default VerifyEmail

@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../config/firebaseConfig'; // Ajuste o caminho conforme necessário
 import CourseCard from './components/CourseCard'; // Importando o novo componente
+import { useAuth } from './context/AuthContext';
 
 export default function Home() {
   const [user, setUser] = useState(null);
@@ -22,26 +23,21 @@ export default function Home() {
     { id: "nodejs-course", title: "Curso de Node.js", image: "/images/nodejs-course.jpg" },
     { id: "react-course", title: "Curso de React", image: "/images/react-course.jpg" }
   ];
-
+  
+  const { currentUser, loading } = useAuth();
+  
   // Verifica o estado de autenticação do usuário
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-
-    return () => unsubscribe();
-  }, []);
 
   // Função para redirecionar para o curso ou login
   const handleCourseClick = (e, courseId) => {
     e.preventDefault();
 
-    if (!user) {
+    if (!currentUser) {
       // Se o usuário não estiver logado, redireciona para a página de login
       router.push('/login');
     } else {
       // Se o usuário estiver logado, redireciona para o curso
-      router.push(`/courses/${courseId}`);
+      router.push(`/`);
     }
   };
 
